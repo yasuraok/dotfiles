@@ -19,7 +19,7 @@ fi
 # 初回のssh接続時、ssh-addを実行してパスフレーズを要求するラップ関数
 ssh() {
   if ! (ssh-add -l >/dev/null 2>&1) ; then
-    ssh-add -t 300
+    ssh-add -t 3600
   fi
   /usr/bin/ssh "$@"
 }
