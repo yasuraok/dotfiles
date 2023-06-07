@@ -13,7 +13,7 @@
 # 端末ごとに個別にssh-agentを立ち上げ、端末ごとにパスフレーズ記憶を独立に持つ
 if [[ -z "${SSH_AGENT_PID}" ]]; then
   eval "$(ssh-agent -s)"
-  trap 'kill $SSH_AGENT_PID' EXIT HUP INT TERM
+  trap 'kill $SSH_AGENT_PID' EXIT
 fi
 
 # 初回のssh接続時、ssh-addを実行してパスフレーズを要求するラップ関数
