@@ -17,7 +17,7 @@ if [ -n "$REMOTE_CONTAINERS" ]; then
   # dotfiles/install.shのタイミングでは早すぎて動かない処理をスクリプトに書き出す
   {
     echo "git config --global core.editor vim";
-    echo "code --install-extension eamodio.gitlens";
+    echo "code --install-extension mhutchie.git-graph";
   } >> ~/dotfiles/devcontainer_init.sh
   
   # devcontainer起動後に一回だけ上記を実行するように.bashrcに仕込む
