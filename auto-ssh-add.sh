@@ -11,15 +11,18 @@
 # fi
 
 # 端末ごとに個別にssh-agentを立ち上げ、端末ごとにパスフレーズ記憶を独立に持つ
-if [[ -z "${SSH_AGENT_PID}" ]]; then
+if [[ -z "${SSH_AGENT_PID}" ]] || ! kill -0 "${SSH_AGENT_PID}" 2>/dev/null; then
   eval "$(ssh-agent -s)"
   trap 'kill $SSH_AGENT_PID' EXIT
 fi
 
 # 初回のssh接続時、ssh-addを実行してパスフレーズを要求するラップ関数
 ssh() {
-  if ! (ssh-add -l >/dev/null 2>&1) ; then
-    ssh-add -t 3600
-  fi
+  ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
   /usr/bin/ssh "$@"
+}
+
+scp() {
+  ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
+  /usr/bin/scp "$@"
 }
