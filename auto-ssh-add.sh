@@ -21,8 +21,10 @@ ssh() {
   ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
   /usr/bin/ssh "$@"
 }
+export -f ssh
 
 scp() {
   ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
   /usr/bin/scp "$@"
 }
+export -f scp
