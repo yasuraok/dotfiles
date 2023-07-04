@@ -19,7 +19,8 @@ if [ -n "$REMOTE_CONTAINERS" ]; then
     echo "git config --global core.editor vim";
     echo "code --install-extension mhutchie.git-graph";
     echo "code --install-extension genieai.chatgpt-vscode";
-    echo "code --install-extension github.copilot-nightly";
+    echo "code --install-extension dzhavat.css-flexbox-cheatsheet";
+    echo "code --install-extension gitHub.copilot";
     echo "code --install-extension github.copilot-chat";
   } >> ~/dotfiles/devcontainer_init.sh
   
