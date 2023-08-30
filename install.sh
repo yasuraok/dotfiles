@@ -25,8 +25,8 @@ if [ -n "$REMOTE_CONTAINERS" ]; then
     echo "code --install-extension dzhavat.css-flexbox-cheatsheet";
 
     echo "code --install-extension genieai.chatgpt-vscode";
-    echo "code --install-extension gitHub.copilot";
-    echo "code --install-extension github.copilot-chat";
+    # echo "code --install-extension gitHub.copilot";
+    # echo "code --install-extension github.copilot-chat";
   } >> ~/dotfiles/devcontainer_init.sh
   
   # devcontainer起動後に一回だけ上記を実行するように.bashrcに仕込む
