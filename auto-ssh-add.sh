@@ -28,3 +28,14 @@ scp() {
   /usr/bin/scp "$@"
 }
 export -f scp
+
+rsync() {
+  for arg in "$@"
+  do
+    if [[ $arg =~ .+\:.+ ]]; then
+      ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
+    fi
+  done
+  /usr/bin/rsync "$@"
+}
+export -f rsync
