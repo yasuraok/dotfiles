@@ -18,18 +18,23 @@ fi
 
 # 初回のssh接続時、ssh-addを実行してパスフレーズを要求するラップ関数
 ssh() {
+  { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
   ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
   /usr/bin/ssh "$@"
+  { local xtrace_r=$?; set $xtrace_; return $xtrace_r; } 2>/dev/null
 }
 export -f ssh
 
 scp() {
+  { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
   ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
   /usr/bin/scp "$@"
+  { local xtrace_r=$?; set $xtrace_; return $xtrace_r; } 2>/dev/null
 }
 export -f scp
 
 rsync() {
+  { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
   for arg in "$@"
   do
     if [[ $arg =~ .+\:.+ ]]; then
@@ -37,5 +42,6 @@ rsync() {
     fi
   done
   /usr/bin/rsync "$@"
+  { local xtrace_r=$?; set $xtrace_; return $xtrace_r; } 2>/dev/null
 }
 export -f rsync
