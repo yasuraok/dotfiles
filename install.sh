@@ -13,10 +13,13 @@ fi
 if [ -n "$REMOTE_CONTAINERS" ]; then
   sudo apt update
   sudo apt install -y vim git bash-completion
-  
+
   # dotfiles/install.shのタイミングでは早すぎて動かない処理をスクリプトに書き出す
   {
     echo "git config --global core.editor vim";
+
+    echo "code --install-extension yasuraok.simple-text-refine";
+
     echo "code --install-extension mhutchie.git-graph";
     echo "code --install-extension donjayamanne.githistory";
     echo "code --install-extension moshfeu.compare-folders";
@@ -28,7 +31,7 @@ if [ -n "$REMOTE_CONTAINERS" ]; then
     # echo "code --install-extension gitHub.copilot";
     # echo "code --install-extension github.copilot-chat";
   } >> ~/dotfiles/devcontainer_init.sh
-  
+
   # devcontainer起動後に一回だけ上記を実行するように.bashrcに仕込む
   {
     echo "";
