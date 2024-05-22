@@ -17,6 +17,7 @@ if [ -n "$REMOTE_CONTAINERS" ]; then
   # dotfiles/install.shのタイミングでは早すぎて動かない処理をスクリプトに書き出す
   {
     echo "git config --global core.editor vim";
+    echo "git config --global rebase.autosquash true";
 
     echo "code --install-extension yasuraok.simple-text-refine";
 
