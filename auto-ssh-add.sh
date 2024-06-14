@@ -33,6 +33,14 @@ scp() {
 }
 export -f scp
 
+sftp() {
+  { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
+  ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
+  /usr/bin/sftp "$@"
+  { local xtrace_r=$?; set $xtrace_; return $xtrace_r; } 2>/dev/null
+}
+export -f sftp
+
 rsync() {
   { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
   for arg in "$@"
