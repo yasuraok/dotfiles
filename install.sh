@@ -19,16 +19,16 @@ if [ -n "$REMOTE_CONTAINERS" ]; then
     echo "git config --global core.editor vim";
     echo "git config --global rebase.autosquash true";
 
-    echo "code --install-extension yasuraok.simple-text-refine";
+    echo "code --install-extension yasuraok.simple-text-refine@prerelease";
 
     echo "code --install-extension mhutchie.git-graph";
     echo "code --install-extension donjayamanne.githistory";
     echo "code --install-extension moshfeu.compare-folders";
 
     echo "code --install-extension yzhang.markdown-all-in-one";
-    echo "code --install-extension dzhavat.css-flexbox-cheatsheet";
 
-    echo "code --install-extension genieai.chatgpt-vscode";
+    # echo "code --install-extension dzhavat.css-flexbox-cheatsheet";
+    # echo "code --install-extension genieai.chatgpt-vscode";
     # echo "code --install-extension gitHub.copilot";
     # echo "code --install-extension github.copilot-chat";
   } >> ~/dotfiles/devcontainer_init.sh
