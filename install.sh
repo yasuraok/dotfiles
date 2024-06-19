@@ -13,33 +13,8 @@ fi
 if [ -n "$REMOTE_CONTAINERS" ]; then
   sudo apt update
   sudo apt install -y vim git bash-completion
+  git config --global core.editor vim
+  git config --global rebase.autosquash true
 
-  # dotfiles/install.shのタイミングでは早すぎて動かない処理をスクリプトに書き出す
-  {
-    echo "git config --global core.editor vim";
-    echo "git config --global rebase.autosquash true";
-
-    echo "code --install-extension yasuraok.simple-text-refine@prerelease";
-
-    echo "code --install-extension mhutchie.git-graph";
-    echo "code --install-extension donjayamanne.githistory";
-    echo "code --install-extension moshfeu.compare-folders";
-
-    echo "code --install-extension yzhang.markdown-all-in-one";
-
-    # echo "code --install-extension dzhavat.css-flexbox-cheatsheet";
-    # echo "code --install-extension genieai.chatgpt-vscode";
-    # echo "code --install-extension gitHub.copilot";
-    # echo "code --install-extension github.copilot-chat";
-  } >> ~/dotfiles/devcontainer_init.sh
-
-  # devcontainer起動後に一回だけ上記を実行するように.bashrcに仕込む
-  {
-    echo "";
-    echo "# hook only once after devcontainer created";
-    echo 'if [ -f "${HOME}/dotfiles/devcontainer_init.sh" ]; then'
-    echo '  bash -xe ${HOME}/dotfiles/devcontainer_init.sh'
-    echo '  rm ${HOME}/dotfiles/devcontainer_init.sh'
-    echo 'fi'
-  } >> ~/.bashrc
+  # 以前はここにcode --install-extensionを入れていたが、VSCodeのsettingのdev.containers.defaultExtensionsを使えばよかったので削除
 fi
