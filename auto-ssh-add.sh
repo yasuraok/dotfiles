@@ -17,9 +17,11 @@ if [[ -z "${SSH_AGENT_PID}" ]] || ! kill -0 "${SSH_AGENT_PID}" 2>/dev/null; then
 fi
 
 # 初回のssh接続時、ssh-addを実行してパスフレーズを要求するラップ関数
+# -xオプションが付いていると表示が増えて鬱陶しいので、一時的にオフにする: https://www.robario.com/2016/04/20
+# ssh-addは~/.ssh/以下の秘密鍵が無い場合に何も表示せずエラーになる。-eが付いているとssh到達前に終了してしまいデバッグがしづらくなるので、|| trueでエラーを無視する
 ssh() {
   { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
-  ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
+  (! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600) || true
   /usr/bin/ssh "$@"
   { local xtrace_r=$?; set $xtrace_; return $xtrace_r; } 2>/dev/null
 }
@@ -27,7 +29,7 @@ export -f ssh
 
 scp() {
   { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
-  ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
+  (! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600) || true
   /usr/bin/scp "$@"
   { local xtrace_r=$?; set $xtrace_; return $xtrace_r; } 2>/dev/null
 }
@@ -35,7 +37,7 @@ export -f scp
 
 sftp() {
   { local xtrace_=+x; test -o xtrace && xtrace_=-x; set +x; } 2>/dev/null
-  ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
+  (! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600) || true
   /usr/bin/sftp "$@"
   { local xtrace_r=$?; set $xtrace_; return $xtrace_r; } 2>/dev/null
 }
@@ -46,7 +48,7 @@ rsync() {
   for arg in "$@"
   do
     if [[ $arg =~ .+\:.+ ]]; then
-      ! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600
+      (! (ssh-add -l >/dev/null 2>&1) && ssh-add -t 3600) || true
     fi
   done
   /usr/bin/rsync "$@"
