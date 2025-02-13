@@ -8,10 +8,6 @@ Userのsettings.jsonで以下を書き込む。一台で設定したら後の端
 {
     "dotfiles.repository": "yasuraok/dotfiles",
     "dotfiles.targetPath": "~/dotfiles",
-    "dotfiles.installCommand": "~/dotfiles/install.sh",
+    "dotfiles.installCommand": "dotfiles_install.sh",
 }
 ```
-
-
-
-Setting Syncで
