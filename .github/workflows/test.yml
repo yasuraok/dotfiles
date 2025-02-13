@@ -6,7 +6,7 @@ jobs:
   test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: install dotfiles
-        run: bash -xe install.sh
+        run: bash -xe dotfiles_install.sh
