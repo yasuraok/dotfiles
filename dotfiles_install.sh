@@ -1,13 +1,14 @@
 #!/bin/bash -xe
 
-# auto ssh-add
-if ! grep -q "^# auto ssh-add$" ~/.bashrc; then
-  {
-    echo "";
-    echo "# auto ssh-add";
-    echo "source ~/dotfiles/auto-ssh-add.sh";
-  } >> ~/.bashrc
-fi
+# TailScaleに移行しつつあって、手元の鍵の使用頻度が減ったのでこの仕込みは止める
+# # auto ssh-add
+# if ! grep -q "^# auto ssh-add$" ~/.bashrc; then
+#   {
+#     echo "";
+#     echo "# auto ssh-add";
+#     echo "source ~/dotfiles/auto-ssh-add.sh";
+#   } >> ~/.bashrc
+# fi
 
 # devcontainer固有の設定
 if [ -n "$REMOTE_CONTAINERS" ]; then
